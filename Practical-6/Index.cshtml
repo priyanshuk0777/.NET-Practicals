@@ -1,0 +1,134 @@
+@model IEnumerable<p6.Models.Product>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Product Catalog</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background-color: lightgray;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button, a {
+            padding: 7px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Product Catalog</h1>
+
+    <a href="/Product/Create">Add New Product</a>
+
+    <hr />
+
+    <h3>Search and Filter</h3>
+
+    <form method="get">
+
+        <input type="text"
+               name="search"
+               placeholder="Search product..." />
+
+        <select name="category">
+
+            <option value="">All Categories</option>
+
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category">@category</option>
+            }
+
+        </select>
+
+        <input type="number"
+               name="minPrice"
+               placeholder="Min Price" />
+
+        <input type="number"
+               name="maxPrice"
+               placeholder="Max Price" />
+
+        <button type="submit">Search</button>
+
+        <a href="/Product/Index">Clear</a>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+
+                <td>@product.Id</td>
+
+                <td>@product.Name</td>
+
+                <td>₹@product.Price</td>
+
+                <td>@product.category</td>
+
+                <td>@product.Description</td>
+
+                <td>
+
+                    <a href="/Product/Details/@product.Id">
+                        Details
+                    </a>
+
+                    <a href="/Product/Edit/@product.Id">
+                        Edit
+                    </a>
+
+                    <a href="/Product/Delete/@product.Id">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</body>
+</html>
