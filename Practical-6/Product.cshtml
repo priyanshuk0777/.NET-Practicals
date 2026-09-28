@@ -1,0 +1,54 @@
+@model p6.Models.Product
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Add Product</title>
+</head>
+
+<body>
+
+    <h1>Add New Product</h1>
+
+    <form method="post">
+
+        <div>
+            <label>Product Name</label>
+            <input type="text" name="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <br />
+
+        <div>
+            <label>Price</label>
+            <input type="number" name="Price" />
+            <span asp-validation-for="Price"></span>
+        </div>
+
+        <br />
+
+        <div>
+            <label>Category</label>
+            <input type="text" name="category" />
+            <span asp-validation-for="category"></span>
+        </div>
+
+        <br />
+
+        <div>
+            <label>Description</label>
+            <textarea name="Description"></textarea>
+        </div>
+
+        <br />
+
+        <button type="submit">Add Product</button>
+
+        <a href="/Product/Index">Cancel</a>
+
+    </form>
+
+</body>
+</html>
