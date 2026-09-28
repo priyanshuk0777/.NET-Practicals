@@ -1,0 +1,39 @@
+@model p6.Models.Product
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Product Details</title>
+</head>
+
+<body>
+
+    <h1>Product Details</h1>
+
+    <p>
+        <b>ID:</b> @Model.Id
+    </p>
+
+    <p>
+        <b>Name:</b> @Model.Name
+    </p>
+
+    <p>
+        <b>Price:</b> ₹@Model.Price
+    </p>
+
+    <p>
+        <b>Category:</b> @Model.category
+    </p>
+
+    <p>
+        <b>Description:</b> @Model.Description
+    </p>
+
+    <br />
+
+    <a href="/Product/Index">Back to Products</a>
+
+</body>
+</html>
