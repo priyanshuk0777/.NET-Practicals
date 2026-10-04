@@ -1,0 +1,209 @@
+@model P7.Models.Feedback
+
+@using (Html.BeginForm(
+    "Submit",
+    "Feedback",
+    FormMethod.Post))
+{
+    <div class="row">
+
+        <!-- Name -->
+
+        <div class="col-md-6 mb-3">
+
+            @Html.LabelFor(
+                m => m.Name,
+                new { @class = "form-label" })
+
+            @Html.TextBoxFor(
+                m => m.Name,
+                new
+                {
+                    @class = "form-control",
+                    placeholder = "Enter your name"
+                })
+
+            @Html.ValidationMessageFor(
+                m => m.Name,
+                "",
+                new { @class = "text-danger" })
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="col-md-6 mb-3">
+
+            @Html.LabelFor(
+                m => m.Email,
+                new { @class = "form-label" })
+
+            @Html.TextBoxFor(
+                m => m.Email,
+                new
+                {
+                    @class = "form-control",
+                    placeholder = "Enter your email"
+                })
+
+            @Html.ValidationMessageFor(
+                m => m.Email,
+                "",
+                new { @class = "text-danger" })
+
+        </div>
+
+    </div>
+
+
+    <!-- Category -->
+
+    <div class="mb-3">
+
+        @Html.LabelFor(
+            m => m.Category,
+            new { @class = "form-label" })
+
+        @Html.DropDownListFor(
+            m => m.Category,
+
+            new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Website",
+                    Value = "Website"
+                },
+
+                new SelectListItem
+                {
+                    Text = "Service",
+                    Value = "Service"
+                },
+
+                new SelectListItem
+                {
+                    Text = "Product",
+                    Value = "Product"
+                },
+
+                new SelectListItem
+                {
+                    Text = "Support",
+                    Value = "Support"
+                }
+            },
+
+            "Select Category",
+
+            new
+            {
+                @class = "form-select"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.Category,
+            "",
+            new { @class = "text-danger" })
+
+    </div>
+
+
+    <!-- Feedback -->
+
+    <div class="mb-3">
+
+        @Html.LabelFor(
+            m => m.Message,
+            new { @class = "form-label" })
+
+        @Html.TextAreaFor(
+            m => m.Message,
+            new
+            {
+                @class = "form-control",
+                rows = "5",
+                placeholder = "Write your feedback..."
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.Message,
+            "",
+            new { @class = "text-danger" })
+
+    </div>
+
+
+    <!-- Rating -->
+
+    <div class="mb-3">
+
+        @Html.LabelFor(
+            m => m.Rating,
+            new { @class = "form-label" })
+
+        @Html.DropDownListFor(
+            m => m.Rating,
+
+            new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "1 - Poor",
+                    Value = "1"
+                },
+
+                new SelectListItem
+                {
+                    Text = "2 - Average",
+                    Value = "2"
+                },
+
+                new SelectListItem
+                {
+                    Text = "3 - Good",
+                    Value = "3"
+                },
+
+                new SelectListItem
+                {
+                    Text = "4 - Very Good",
+                    Value = "4"
+                },
+
+                new SelectListItem
+                {
+                    Text = "5 - Excellent",
+                    Value = "5"
+                }
+            },
+
+            "Select Rating",
+
+            new
+            {
+                @class = "form-select"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.Rating,
+            "",
+            new { @class = "text-danger" })
+
+    </div>
+
+
+    <!-- Submit -->
+
+    <div class="text-center">
+
+        <button type="submit"
+                class="btn btn-primary px-5">
+
+            Submit Feedback
+
+        </button>
+
+    </div>
+}
