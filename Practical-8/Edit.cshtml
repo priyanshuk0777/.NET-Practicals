@@ -1,0 +1,10 @@
+@model Product
+@{ ViewData["Title"] = "Edit Product"; }
+<div class="form-wrap"><div class="form-heading"><p class="eyebrow">UPDATE</p><h1>Edit Product</h1><p>Modify the selected inventory record.</p></div>
+<form asp-action="Edit" method="post" class="card border-0 shadow-sm p-4">
+ <input type="hidden" asp-for="ProductId" />
+ <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+ <partial name="_ProductForm" model="Model" />
+ <div class="d-flex gap-2 mt-3"><button class="btn btn-primary px-4">Update Product</button><a asp-action="Index" class="btn btn-outline-secondary">Cancel</a></div>
+</form></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
