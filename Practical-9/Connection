@@ -1,0 +1,5 @@
+<connectionStrings>
+    <add name="PlacementConnection"
+         connectionString="Data Source=.;Initial Catalog=PlacementDB;Integrated Security=True"
+         providerName="System.Data.SqlClient" />
+</connectionStrings>
