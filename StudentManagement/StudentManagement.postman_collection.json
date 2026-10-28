@@ -1,0 +1,105 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    "name": "Student Management API (.NET 8)",
+    "description": "Practical 10 - Student Management REST API built with ASP.NET Core 8. Demonstrates Middleware, API (CRUD) and layered Project Structure.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get All Students",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"]
+        },
+        "description": "Returns the complete list of students. Seeded with 3 records on first run."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Student By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "1"]
+        },
+        "description": "Returns a single student. Try id 999 to see the 404 response."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Create Student (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sneha Iyer\",\n  \"email\": \"sneha.iyer@example.com\",\n  \"course\": \"B.Tech AI/ML\",\n  \"age\": 22\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students"]
+        },
+        "description": "Creates a student. Returns 201 Created with a Location header. Send an invalid body (e.g. age 5 or bad email) to see the automatic 400 validation response."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Update Student (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Rahul S. Sharma\",\n  \"email\": \"rahul.s.sharma@example.com\",\n  \"course\": \"M.Tech CSE\",\n  \"age\": 23\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "1"]
+        },
+        "description": "Updates student with id 1. Returns the updated record, or 404 if the id does not exist."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Delete Student",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/2",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "students", "2"]
+        },
+        "description": "Deletes student with id 2. Returns 204 No Content on success, 404 if not found."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7017",
+      "type": "string"
+    }
+  ]
+}
