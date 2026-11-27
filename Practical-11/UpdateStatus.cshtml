@@ -1,0 +1,57 @@
+@model StudentCampusPortal.Models.ServiceRequest
+@{
+    ViewData["Title"] = "Update Status";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3 border-bottom">
+                <h4 class="mb-0 fw-bold text-primary">Update Request Status</h4>
+                <p class="text-muted small mb-0">Change the lifecycle status of Request #@ViewBag.RequestId</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="mb-3 p-3 bg-light rounded border">
+                    <div class="row mb-1">
+                        <div class="col-5 text-muted small">Request ID:</div>
+                        <div class="col-7 fw-bold">#@ViewBag.RequestId</div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5 text-muted small">Student Name:</div>
+                        <div class="col-7 fw-semibold">@ViewBag.StudentName</div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-5 text-muted small">Service Type:</div>
+                        <div class="col-7"><span class="badge bg-secondary">@ViewBag.ServiceType</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5 text-muted small">Current Status:</div>
+                        <div class="col-7">
+                            <span class="badge bg-info text-dark">@ViewBag.CurrentStatus</span>
+                        </div>
+                    </div>
+                </div>
+                <form asp-action="UpdateStatus" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@ViewBag.RequestId" />
+                    <div class="mb-4">
+                        <label for="status" class="form-label fw-semibold">New Status</label>
+                        <select id="status" name="status" class="form-select form-select-lg">
+                            <option value="Pending" selected="@(ViewBag.CurrentStatus == "Pending")">Pending</option>
+                            <option value="In Progress" selected="@(ViewBag.CurrentStatus == "In Progress")">In Progress</option>
+                            <option value="Completed" selected="@(ViewBag.CurrentStatus == "Completed")">Completed</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            &larr; Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success px-4 fw-semibold">
+                            Save Status
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
