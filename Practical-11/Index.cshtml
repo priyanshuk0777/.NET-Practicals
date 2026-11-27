@@ -1,0 +1,170 @@
+@model IEnumerable<StudentCampusPortal.Models.ServiceRequest>
+@{
+    ViewData["Title"] = "Campus Dashboard";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="p-4 bg-white rounded-3 shadow-sm border-start border-primary border-4">
+            <h1 class="display-6 fw-bold text-primary mb-1">Smart Campus Service Portal</h1>
+            <p class="text-muted mb-0">Practical 11: ASP.NET Core MVC &amp; Web API Integration with SQL Server Database</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3 col-sm-6">
+        <div class="card border-0 shadow-sm text-center py-3 bg-white">
+            <div class="card-body">
+                <span class="text-secondary text-uppercase fw-semibold small">Total Requests</span>
+                <h2 class="display-5 fw-bold text-primary my-2">@ViewBag.TotalCount</h2>
+                <a asp-controller="ServiceRequest" asp-action="Index" class="btn btn-sm btn-light border">View All &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card border-0 shadow-sm text-center py-3 bg-white">
+            <div class="card-body">
+                <span class="text-secondary text-uppercase fw-semibold small">Pending</span>
+                <h2 class="display-5 fw-bold text-warning my-2">@ViewBag.PendingCount</h2>
+                <span class="badge bg-warning text-dark">Awaiting Action</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card border-0 shadow-sm text-center py-3 bg-white">
+            <div class="card-body">
+                <span class="text-secondary text-uppercase fw-semibold small">In Progress</span>
+                <h2 class="display-5 fw-bold text-info my-2">@ViewBag.InProgressCount</h2>
+                <span class="badge bg-info text-dark">Under Processing</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card border-0 shadow-sm text-center py-3 bg-white">
+            <div class="card-body">
+                <span class="text-secondary text-uppercase fw-semibold small">Completed</span>
+                <h2 class="display-5 fw-bold text-success my-2">@ViewBag.CompletedCount</h2>
+                <span class="badge bg-success">Resolved</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold">Recent Service Requests</h5>
+        <div>
+            <a asp-controller="ServiceRequest" asp-action="Create" class="btn btn-primary btn-sm me-2">
+                + Submit New Request
+            </a>
+            <a asp-controller="ServiceRequest" asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                View All
+            </a>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-3">ID</th>
+                        <th>Student Name</th>
+                        <th>Department</th>
+                        <th>Service Type</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th class="text-end pe-3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-3 fw-semibold">#@item.RequestId</td>
+                                <td>@item.StudentName</td>
+                                <td>@item.Department</td>
+                                <td><span class="badge bg-light text-dark border">@item.ServiceType</span></td>
+                                <td>
+                                    @if (item.Priority == "High")
+                                    {
+                                        <span class="badge bg-danger">High</span>
+                                    }
+                                    else if (item.Priority == "Medium")
+                                    {
+                                        <span class="badge bg-warning text-dark">Medium</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Low</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Status == "Completed")
+                                    {
+                                        <span class="badge bg-success">Completed</span>
+                                    }
+                                    else if (item.Status == "In Progress")
+                                    {
+                                        <span class="badge bg-info text-dark">In Progress</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    }
+                                </td>
+                                <td class="text-muted small">@item.RequestDate.ToString("yyyy-MM-dd")</td>
+                                <td class="text-end pe-3">
+                                    <a asp-controller="ServiceRequest" asp-action="UpdateStatus" asp-route-id="@item.RequestId" class="btn btn-outline-primary btn-sm py-0">
+                                        Update Status
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center py-4 text-muted">
+                                No service requests found. Click <a asp-controller="ServiceRequest" asp-action="Create">here</a> to create one!
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm bg-white">
+    <div class="card-body">
+        <h5 class="fw-bold mb-2">REST API Endpoints Available</h5>
+        <p class="text-muted small mb-3">The portal also includes ASP.NET Core REST API controller for third-party client integrations:</p>
+        <div class="row g-2">
+            <div class="col-md-4">
+                <div class="p-2 border rounded bg-light">
+                    <span class="badge bg-success me-1">GET</span>
+                    <code>/api/ServiceApi</code>
+                    <div class="small text-muted mt-1">Fetch all service requests in JSON</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-2 border rounded bg-light">
+                    <span class="badge bg-primary me-1">POST</span>
+                    <code>/api/ServiceApi</code>
+                    <div class="small text-muted mt-1">Create a new service request</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-2 border rounded bg-light">
+                    <span class="badge bg-warning text-dark me-1">PUT</span>
+                    <code>/api/ServiceApi/UpdateStatus/{id}</code>
+                    <div class="small text-muted mt-1">Update status for request ID</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
